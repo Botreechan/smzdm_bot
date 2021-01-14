@@ -60,7 +60,7 @@ if __name__ == '__main__':
     print('sc_key: ', SERVERCHAN_SECRETKEY)
     if isinstance(SERVERCHAN_SECRETKEY,str) and len(SERVERCHAN_SECRETKEY)>0:
         print('检测到 SCKEY， 准备推送')
-        push_to_wechat(text = '张大妈每日签到',
+        push_to_wechat(text = '值得买张大妈每日签到',
                         desp = str(res["data"]["slogan"]),
                         secretKey = SERVERCHAN_SECRETKEY)
     print('代码完毕')
