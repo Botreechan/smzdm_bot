@@ -3,11 +3,12 @@
 使用github actions 定时执行
 @author : stark
 """
-import requests,os
+import requests, os
 from sys import argv
 
 import config
 from utils.serverchan_push import push_to_wechat
+
 
 class SMZDM_Bot(object):
     def __init__(self):
@@ -25,7 +26,7 @@ class SMZDM_Bot(object):
             print(result)
             return True
         except Exception as e:
-            print(f'Error : {e}')            
+            print(f'Error : {e}')
             return False
 
     def load_cookie_str(self, cookies):
@@ -34,7 +35,7 @@ class SMZDM_Bot(object):
         cookie 为浏览器复制来的字符串
         :param cookie: 登录过的社区网站 cookie
         """
-        self.session.headers['Cookie'] = cookies    
+        self.session.headers['Cookie'] = cookies
 
     def checkin(self):
         """
@@ -47,8 +48,6 @@ class SMZDM_Bot(object):
         return msg.content
 
 
-
-
 if __name__ == '__main__':
     sb = SMZDM_Bot()
     cookies = config.TEST_COOKIE
@@ -58,9 +57,9 @@ if __name__ == '__main__':
     SERVERCHAN_SECRETKEY = config.SERVERCHAN_SECRETKEY
     # SERVERCHAN_SECRETKEY = ""
     print('sc_key: ', SERVERCHAN_SECRETKEY)
-    if isinstance(SERVERCHAN_SECRETKEY,str) and len(SERVERCHAN_SECRETKEY)>0:
+    if isinstance(SERVERCHAN_SECRETKEY, str) and len(SERVERCHAN_SECRETKEY) > 0:
         print('检测到 SCKEY， 准备推送')
-        push_to_wechat(text = '值得买张大妈每日签到',
-                        desp = str(res["data"]["slogan"]),
-                        secretKey = SERVERCHAN_SECRETKEY)
+        push_to_wechat(text='值得买张大妈每日签到',
+                       desp="已签到天数：" + str(res["data"]["checkin_num"]),
+                       secretKey=SERVERCHAN_SECRETKEY)
     print('代码完毕')
